@@ -122,14 +122,8 @@ show tables from hive.default;
 # 查看表数据
 select * from hive.default.student;
 ```
-![输入图片说明](https://foruda.gitee.com/images/1684028152703941755/dc144303_1350539.png "屏幕截图")
-
-docker-compose 快速部署 Presto（Trino）保姆级教程就先到这里了，有任何疑问可关注我的公众号【大数据与云原生技术分享】加群交流或私信咨询问题，如这篇文章对你有所帮助，麻烦帮忙一键三连（**点赞、转发、加关注**）哦~
-
-![输入图片说明](images/wx.png)
 
 
-更详细讲解教程：https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487951&idx=1&sn=de71c3ae3b4b0d3a5cd89efef11b5e60&chksm=ead0ed26dda76430f30ff4e95fbac5870b2b3e0f62c5eba456c1244ff1de5d928a800c687db0#rd
 
 
 
