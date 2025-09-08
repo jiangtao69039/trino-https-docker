@@ -58,7 +58,6 @@ web 地址：`http://ip:30080`
 ![输入图片说明](https://foruda.gitee.com/images/1684028095419486762/92e5bb87_1350539.png "屏幕截图")
 
 ## 五、简单测试验证
-hive和mysql快熟部署文档可参考我这篇文章：[通过 docker-compose 快速部署 Hive 详细教程](https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487266&idx=1&sn=adf1e759986020d5fdde1376a24a7e0a&chksm=ead0f3cbdda77add2ebbff2007e44eb9bc357dcb54c778b2d50b3c02961a958315978dc4ae72#rd)
 
 ### 1）mysql 数据源
 添加 mysql 数据源，在宿主机上配置即可，因已经挂载了
@@ -131,5 +130,6 @@ docker-compose 快速部署 Presto（Trino）保姆级教程就先到这里了�
 
 
 更详细讲解教程：https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487951&idx=1&sn=de71c3ae3b4b0d3a5cd89efef11b5e60&chksm=ead0ed26dda76430f30ff4e95fbac5870b2b3e0f62c5eba456c1244ff1de5d928a800c687db0#rd
+
 
 
