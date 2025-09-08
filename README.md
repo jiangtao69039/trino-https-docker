@@ -24,7 +24,7 @@ docker network create hadoop-network
 docker network ls
 ```
 
-## 四、开始部署
+## 开始部署
 ```bash
 cd docker-compose-presto
 
@@ -40,6 +40,7 @@ openssl req -x509 -new -nodes -sha512 -days 3650 \
 # 合并
 cat trino.key trino.cert > trino.pem
 
+cd ..
 
 sudo chown -R 10000:10000 ./etc
 sudo chown -R 10000:10000 ./jmx-exporter
@@ -133,3 +134,4 @@ docker-compose 快速部署 Presto（Trino）保姆级教程就先到这里了�
 
 
 更详细讲解教程：https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487951&idx=1&sn=de71c3ae3b4b0d3a5cd89efef11b5e60&chksm=ead0ed26dda76430f30ff4e95fbac5870b2b3e0f62c5eba456c1244ff1de5d928a800c687db0#rd
+
