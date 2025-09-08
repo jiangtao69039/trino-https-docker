@@ -1,0 +1,65 @@
+version: '3'
+services:
+  trino-coordinator:
+    image: registry.cn-hangzhou.aliyuncs.com/bigdata_cloudnative/trino-jmx-exporter:416
+    user: "hadoop:hadoop"
+    container_name: trino-coordinator
+    hostname: trino-coordinator
+    restart: always
+    privileged: true
+    env_file:
+      - .env
+    volumes:
+      - ./etc/coordinator/config.properties:${TRINO_HOME}/etc/config.properties
+      - ./etc/coordinator/jvm.config:${TRINO_HOME}/etc/jvm.config
+      - ./etc/coordinator/log.properties:${TRINO_HOME}/etc/log.properties
+      - ./etc/coordinator/node.properties:${TRINO_HOME}/etc/node.properties
+      - ./etc/catalog/:${TRINO_HOME}/etc/catalog/
+      - ./jmx-exporter/jmx_config.yaml:${TRINO_HOME}/etc/jmx_config.yaml
+      - ./tls:${TRINO_HOME}/etc/tls
+    ports:
+      - "30080:${TRINO_SERVER_PORT}"
+      - "30443:${TRINO_SERVER_HTTPS_PORT}"
+      - "30980:${JMX_RMIREGISTRY_PORT}"
+      - "30981:${JMX_RMISERVER_PORT}"
+      - "3900"
+    command: ["sh","-c","/opt/apache/bootstrap.sh trino-coordinator"]
+    networks:
+      - hadoop-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:${TRINO_SERVER_PORT}/v1/info || exit 1"]
+      interval: 10s
+      timeout: 20s
+      retries: 3
+  trino-worker:
+    image: registry.cn-hangzhou.aliyuncs.com/bigdata_cloudnative/trino:416
+    user: "hadoop:hadoop"
+    restart: always
+    privileged: true
+    deploy:
+      replicas: 1
+    env_file:
+      - .env
+    volumes:
+      - ./etc/worker/config.properties:${TRINO_HOME}/etc/config.properties
+      - ./etc/worker/jvm.config:${TRINO_HOME}/etc/jvm.config
+      - ./etc/worker/log.properties:${TRINO_HOME}/etc/log.properties
+      - ./etc/worker/node.properties:${TRINO_HOME}/etc/node.properties
+      - ./etc/catalog/:${TRINO_HOME}/etc/catalog/
+      - ./jmx-exporter/jmx_config.yaml:${TRINO_HOME}/etc/jmx_config.yaml
+      - ./tls:${TRINO_HOME}/etc/tls
+    ports:
+      - "${TRINO_SERVER_PORT}"
+    command: ["sh","-c","/opt/apache/bootstrap.sh trino-worker"]
+    networks:
+      - hadoop-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:${TRINO_SERVER_PORT}/v1/info || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3  
+
+# 连接外部网络
+networks:
+  hadoop-network:
+    external: true
