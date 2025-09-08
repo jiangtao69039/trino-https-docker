@@ -5,10 +5,11 @@ Presto是一个快速的分布式查询引擎，最初由Facebook开发，目前
 
 
 ## 二、前期准备
-### 1）安装 docker
+### 1）安装环境
 
 ```
-### 2）安装 docker-compose
+安装 docker
+安装 docker compose
 
 ```
 ## 三、创建网络
@@ -46,10 +47,10 @@ sudo chown -R 10000:10000 ./tls
 
 
 # 启动服务
-docker-compose -f docker-compose.yaml up -d
+docker compose -f docker-compose.yaml up -d
 
 # 查看
-docker-compose -f docker-compose.yaml ps
+docker compose -f docker-compose.yaml ps
 ```
 ![输入图片说明](https://foruda.gitee.com/images/1684028085973839978/3befcc73_1350539.png "屏幕截图")
 
@@ -72,7 +73,7 @@ EOF
 重启 trino
 
 ```bash
-docker-compose -f docker-compose.yaml restart
+docker compose -f docker-compose.yaml restart
 ```
 测试验证
 
@@ -103,7 +104,7 @@ EOF
 重启 trino
 
 ```bash
-docker-compose -f docker-compose.yaml restart
+docker compose -f docker-compose.yaml restart
 ```
 
 测试验证
@@ -122,6 +123,7 @@ show tables from hive.default;
 # 查看表数据
 select * from hive.default.student;
 ```
+
 
 
 
