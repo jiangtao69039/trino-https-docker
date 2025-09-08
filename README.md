@@ -8,27 +8,11 @@ Presto是一个快速的分布式查询引擎，最初由Facebook开发，目前
 ![输入图片说明](https://foruda.gitee.com/images/1684027922160718639/4f0b486f_1350539.png "屏幕截图")
 
 ## 二、前期准备
-### 1）部署 docker
-```bash
-# 安装yum-config-manager配置工具
-yum -y install yum-utils
+### 1）安装 docker
 
-# 建议使用阿里云yum源：（推荐）
-#yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-
-# 安装docker-ce版本
-yum install -y docker-ce
-# 启动并开机启动
-systemctl enable --now docker
-docker --version
 ```
-### 2）部署 docker-compose
-```bash
-curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+### 2）安装 docker-compose
 
-chmod +x /usr/local/bin/docker-compose
-docker-compose --version
 ```
 ## 三、创建网络
 
@@ -42,8 +26,26 @@ docker network ls
 
 ## 四、开始部署
 ```bash
-git clone https://gitee.com/hadoop-bigdata/docker-compose-presto.git
 cd docker-compose-presto
+
+mkdir tls && cd tls
+# 生成 CA 证书私钥
+openssl genrsa -out trino.key 4096
+# 生成 CA 证书
+openssl req -x509 -new -nodes -sha512 -days 3650 \
+ -subj "/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=mytrino.com" \
+ -key trino.key \
+ -out trino.cert
+
+# 合并
+cat trino.key trino.cert > trino.pem
+
+
+sudo chown -R 10000:10000 ./etc
+sudo chown -R 10000:10000 ./jmx-exporter
+sudo chown -R 10000:10000 ./tls
+
+
 
 # 启动服务
 docker-compose -f docker-compose.yaml up -d
@@ -128,5 +130,6 @@ select * from hive.default.student;
 docker-compose 快速部署 Presto（Trino）保姆级教程就先到这里了，有任何疑问可关注我的公众号【大数据与云原生技术分享】加群交流或私信咨询问题，如这篇文章对你有所帮助，麻烦帮忙一键三连（**点赞、转发、加关注**）哦~
 
 ![输入图片说明](images/wx.png)
+
 
 更详细讲解教程：https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487951&idx=1&sn=de71c3ae3b4b0d3a5cd89efef11b5e60&chksm=ead0ed26dda76430f30ff4e95fbac5870b2b3e0f62c5eba456c1244ff1de5d928a800c687db0#rd
