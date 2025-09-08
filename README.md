@@ -3,9 +3,6 @@ Presto是一个快速的分布式查询引擎，最初由Facebook开发，目前
 
 > 但是Presto目前有两大分支：`PrestoDB（背靠Facebook）`和 `PrestoSQL现在改名为Trino（Presto的创始团队）`，虽然PrestoDB背靠Facebook，但是社区活跃度和使用群体还是远不如Trino。所以这里以Trino为主展开讲解。
 
-关于更多的Presto介绍可以参考我这篇文章：[大数据Hadoop之——基于内存型SQL查询引擎Presto（Presto-Trino环境部署）](https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247484420&idx=1&sn=6a8851681fda8896048f7c76b52ab1f7&chksm=ead0f8eddda771fbcec6cac7fb14661379568c26749c70b93c2cca8ff63d409c21c7f613573c#rd)
-
-![输入图片说明](https://foruda.gitee.com/images/1684027922160718639/4f0b486f_1350539.png "屏幕截图")
 
 ## 二、前期准备
 ### 1）安装 docker
@@ -134,4 +131,5 @@ docker-compose 快速部署 Presto（Trino）保姆级教程就先到这里了�
 
 
 更详细讲解教程：https://mp.weixin.qq.com/s?__biz=MzI3MDM5NjgwNg==&mid=2247487951&idx=1&sn=de71c3ae3b4b0d3a5cd89efef11b5e60&chksm=ead0ed26dda76430f30ff4e95fbac5870b2b3e0f62c5eba456c1244ff1de5d928a800c687db0#rd
+
 
